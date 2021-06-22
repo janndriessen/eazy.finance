@@ -1,1 +1,1 @@
-# eazy.finance
+# eazy.finance 🕶 
