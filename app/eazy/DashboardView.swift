@@ -16,7 +16,7 @@ struct DashboardView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     HStack(alignment: .bottom) {
-                        Text("Hi Alice 👋🏼")
+                        Text("Hi Alice/Bob 👋🏼🕶")
                             .font(.system(.title, design: .rounded))
                         Spacer()
                         Text("💳")
@@ -53,10 +53,39 @@ private struct BorrowView: View {
                                    startPoint: .top,
                                    endPoint: .bottom))
                 .frame(height: 200)
-            VStack {
-                Text("BORROW")
-                    .font(.system(.title, design: .rounded).bold())
-                    .foregroundColor(EazyColor.headline)
+            VStack(alignment: .leading) {
+                HStack(alignment: .bottom) {
+                    Text("BORROW")
+                        .font(.system(.title, design: .rounded).bold())
+                        .foregroundColor(EazyColor.headline)
+                    Spacer()
+                    Text("APY \(apy)")
+                        .font(.system(.subheadline, design: .rounded))
+                        .foregroundColor(EazyColor.title)
+                }
+                HStack {
+                    ZStack {
+                        Text("Borrow More")
+                            .font(.system(.subheadline, design: .rounded).bold())
+                            .foregroundColor(EazyColor.element)
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 16)
+                            .background(
+                                RoundedRectangle(cornerRadius: 15.0)
+                                    .fill(EazyColor.button.opacity(0.56)))
+                    }
+                    Spacer()
+                    ZStack {
+                        Text("Repay")
+                            .font(.system(.subheadline, design: .rounded).bold())
+                            .foregroundColor(EazyColor.element)
+                            .padding(.vertical, 8)
+                            .padding(.horizontal, 16)
+                            .background(
+                                RoundedRectangle(cornerRadius: 15.0)
+                                    .fill(EazyColor.button.opacity(0.86)))
+                    }
+                }
             }
             .padding()
         }
@@ -73,11 +102,31 @@ private struct EarnView: View {
                     LinearGradient(gradient: EazyGradient.element,
                                    startPoint: .top,
                                    endPoint: .bottom))
-                .frame(height: 200)
-            VStack {
-                Text("EARN")
-                    .font(.system(.title, design: .rounded).bold())
-                    .foregroundColor(EazyColor.headline)
+                .frame(height: 164)
+            VStack(alignment: .leading) {
+                HStack(alignment: .bottom) {
+                    Text("EARN")
+                        .font(.system(.title, design: .rounded).bold())
+                        .foregroundColor(EazyColor.headline)
+                    Spacer()
+                    Text("APY \(apy)")
+                        .font(.system(.subheadline, design: .rounded))
+                        .foregroundColor(EazyColor.title)
+                }
+                Text("Supply some money via your added\npayment methods and start earning.")
+                    .font(.system(.subheadline, design: .rounded))
+                    .foregroundColor(EazyColor.text)
+                    .padding(.vertical, 4)
+                ZStack {
+                    Text("Start Earning")
+                        .font(.system(.subheadline, design: .rounded).bold())
+                        .foregroundColor(EazyColor.element)
+                        .padding(.vertical, 8)
+                        .padding(.horizontal, 16)
+                        .background(
+                            RoundedRectangle(cornerRadius: 15.0)
+                                .fill(EazyColor.button.opacity(0.86)))
+                }
             }
             .padding()
         }
@@ -102,8 +151,10 @@ private struct TransactionListItem: View {
         HStack {
             VStack(alignment: .leading) {
                 Text("0xf2c7ca6...d73f")
+                    .font(.system(.body, design: .rounded))
                     .foregroundColor(EazyColor.highlight)
                 Text("12:00")
+                    .font(.system(.subheadline, design: .rounded))
                     .foregroundColor(EazyColor.text)
             }
             Spacer()
@@ -122,11 +173,13 @@ private struct TransactionListItem: View {
                 }
                 Spacer()
             }
-            .padding(.trailing, 16)
+            .padding(.trailing, 8)
             VStack(alignment: .trailing) {
-                Text("1000 USDC")
+                Text("1,000 USDC")
+                    .font(.system(.body, design: .rounded))
                     .foregroundColor(EazyColor.title)
-                Text("$1000")
+                Text("$1,000")
+                    .font(.system(.subheadline, design: .rounded))
                     .foregroundColor(EazyColor.text)
             }
         }

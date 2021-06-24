@@ -11,6 +11,7 @@ import SwiftUI
 enum EazyColor {
     static let background = Color(hex: 0xFFFFFF)
     static let borrow = Color(hex: 0x8BB3B3)
+    static let button = Color(hex: 0x2B2E33)
     static let element = Color(hex: 0xF0F5F9)
     static let headline = Color(hex: 0x2B2E33)
     static let highlight = Color(hex: 0x331084)
