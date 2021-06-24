@@ -52,7 +52,7 @@ private struct BorrowView: View {
                     LinearGradient(gradient: EazyGradient.borrow,
                                    startPoint: .top,
                                    endPoint: .bottom))
-                .frame(height: 200)
+                .frame(height: 210)
             VStack(alignment: .leading) {
                 HStack(alignment: .bottom) {
                     Text("BORROW")
@@ -63,6 +63,24 @@ private struct BorrowView: View {
                         .font(.system(.subheadline, design: .rounded))
                         .foregroundColor(EazyColor.title)
                 }
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("$1,000.00")
+                            .font(.system(.headline, design: .rounded))
+                            .padding(8)
+                        Text("Borrowed")
+                            .font(.system(.subheadline, design: .rounded))
+                    }
+                    HStack {
+                        Text("$1,000.00")
+                            .font(.system(.headline, design: .rounded))
+                            .padding(8)
+                        Text("Collateral")
+                            .font(.system(.subheadline, design: .rounded))
+                    }
+                }
+                .padding(.leading, -6)
+                .padding(.vertical, 12)
                 HStack {
                     ZStack {
                         Text("Borrow More")
