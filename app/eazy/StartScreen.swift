@@ -12,7 +12,7 @@ struct StartScreen: View {
         VStack {
             Spacer()
             Text("eazy.finance 🕶")
-                .font(.system(size: 46, design: .rounded).bold())
+                .font(.system(size: 44, design: .rounded).bold())
                 .padding()
             Spacer()
             Text("Powered by")
