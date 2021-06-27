@@ -21,6 +21,9 @@ struct DashboardView: View {
                             .font(.system(.title, design: .rounded))
                         Spacer()
                         Text("💳")
+                            .onTapGesture {
+                                CardsApi().testAuth()
+                            }
                     }
                     .padding()
                     BorrowView(apy: "3.10%")
