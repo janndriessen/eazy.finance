@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6911B7062688729F00694D60 /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6911B7052688729F00694D60 /* StartScreen.swift */; };
 		6943C96C2684857600A120D6 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6943C96B2684857600A120D6 /* DashboardView.swift */; };
 		6943C96E2684859C00A120D6 /* EazyColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6943C96D2684859C00A120D6 /* EazyColors.swift */; };
 		6976D2852681D60E00E50002 /* eazyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6976D2842681D60E00E50002 /* eazyApp.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6911B7052688729F00694D60 /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
 		6943C96B2684857600A120D6 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		6943C96D2684859C00A120D6 /* EazyColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EazyColors.swift; sourceTree = "<group>"; };
 		6976D2812681D60E00E50002 /* eazy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = eazy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +62,7 @@
 				6976D2842681D60E00E50002 /* eazyApp.swift */,
 				6976D2862681D60E00E50002 /* ContentView.swift */,
 				6943C96B2684857600A120D6 /* DashboardView.swift */,
+				6911B7052688729F00694D60 /* StartScreen.swift */,
 				6976D2882681D60F00E50002 /* Assets.xcassets */,
 				6976D28D2681D60F00E50002 /* Info.plist */,
 				6976D28A2681D60F00E50002 /* Preview Content */,
@@ -146,6 +149,7 @@
 			files = (
 				6976D2872681D60E00E50002 /* ContentView.swift in Sources */,
 				6943C96C2684857600A120D6 /* DashboardView.swift in Sources */,
+				6911B7062688729F00694D60 /* StartScreen.swift in Sources */,
 				6943C96E2684859C00A120D6 /* EazyColors.swift in Sources */,
 				6976D2852681D60E00E50002 /* eazyApp.swift in Sources */,
 			);
