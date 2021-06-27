@@ -8,5 +8,6 @@
 import Foundation
 
 enum EazyConfig {
+    static let circleSandboxBaseUrl = "https://api-sandbox.circle.com"
     static let circleSandboxApiKey = ""
 }

@@ -16,7 +16,7 @@ struct Card {
 }
 
 final class CardsApi: ObservableObject {
-    private let baseUrl = "https://api-sandbox.circle.com"
+    private let baseUrl = EazyConfig.circleSandboxBaseUrl
     private let sandboxApiKey = EazyConfig.circleSandboxApiKey
 
     @Published var cards: [Card] = []
