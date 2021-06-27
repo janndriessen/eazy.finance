@@ -57,14 +57,9 @@ final class CardsApi: ObservableObject {
     }
 
     func testAuth() {
-        guard let url = URL(string: "https://api-sandbox.circle.com/v1/configuration") else {
-            return
-        }
-
-        var request = URLRequest(url: url)
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("Bearer \(sandboxApiKey)", forHTTPHeaderField: "Authorization")
-        request.httpMethod = "GET"
+        let path = "/configuration"
+        let requestBuilder = RequestBuilder()
+        guard let request = requestBuilder.buildCircleApiRequest(for: path, method: .get) else { return }
 
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
             if let error = error {
@@ -81,7 +76,6 @@ final class CardsApi: ObservableObject {
             print("works")
         })
         task.resume()
-        
     }
 }
 
