@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct DashboardView: View {
+    @State private var showPayoutMessage = false
     let transactions = ["tx1", "tx2", "tx3", "tx4", "tx5"]
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             EazyColor.background.ignoresSafeArea()
             ScrollView {
                 VStack(alignment: .leading) {
@@ -32,6 +33,22 @@ struct DashboardView: View {
                 }
                 .padding()
             }
+            MessageView()
+                .offset(x: 0, y: showPayoutMessage ? 0 : -150)
+        }
+        .onAppear() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                togglePayoutMessage()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    togglePayoutMessage()
+                }
+            }
+        }
+    }
+
+    private func togglePayoutMessage() {
+        withAnimation {
+            self.showPayoutMessage.toggle()
         }
     }
 }
@@ -39,6 +56,22 @@ struct DashboardView: View {
 struct DashboardView_Previews: PreviewProvider {
     static var previews: some View {
         DashboardView()
+    }
+}
+
+private struct MessageView: View {
+    var body: some View {
+        VStack(alignment: .center) {
+            Text("Your borrowed money is ready for payout.\nTap here to send it.")
+                .font(.system(.subheadline, design: .rounded))
+                .fixedSize()
+                .foregroundColor(.white)
+                .multilineTextAlignment(.leading)
+                .padding(16)
+                .background(
+                    RoundedRectangle(cornerRadius: 15.0)
+                        .fill(EazyColor.highlight))
+        }
     }
 }
 
