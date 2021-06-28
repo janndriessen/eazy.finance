@@ -8,7 +8,7 @@
 import Foundation
 
 final class PayoutsApi: ObservableObject {
-    func payout(amount: String) {
+    func payout(amount: String, completion: @escaping () -> Void) {
         let payoutPath = "/payouts"
     
         let payload = PayoutPayload.getPayload(for: amount)
@@ -20,16 +20,19 @@ final class PayoutsApi: ObservableObject {
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
             if let error = error {
                 print("Error testing api request: \(error)")
+                completion()
                 return
             }
 
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
-                print("Error with the response, unexpected status code: \(response)")
+                print("Error with the response, unexpected status code: \(String(describing: response))")
+                completion()
                 return
             }
 
             print("works")
+            completion()
         })
         task.resume()
     }

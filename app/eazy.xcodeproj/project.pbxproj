@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		6911B7062688729F00694D60 /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6911B7052688729F00694D60 /* StartScreen.swift */; };
 		6911B70A268876C200694D60 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6911B709268876C200694D60 /* AppState.swift */; };
+		69122B4A26899F87006C4205 /* PayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69122B4926899F87006C4205 /* PayoutView.swift */; };
+		69122B4C2689A0FE006C4205 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69122B4B2689A0FE006C4205 /* Buttons.swift */; };
+		69122B4E2689A5C6006C4205 /* PayoutCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69122B4D2689A5C6006C4205 /* PayoutCompletedView.swift */; };
 		6926D3A9268884CB003A32CF /* CardsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6926D3A8268884CB003A32CF /* CardsApi.swift */; };
 		6926D3AB26888F63003A32CF /* config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6926D3AA26888F63003A32CF /* config.swift */; };
 		693442742688906400339CC3 /* PaymentsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693442732688906400339CC3 /* PaymentsApi.swift */; };
@@ -25,6 +28,9 @@
 /* Begin PBXFileReference section */
 		6911B7052688729F00694D60 /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
 		6911B709268876C200694D60 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		69122B4926899F87006C4205 /* PayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayoutView.swift; sourceTree = "<group>"; };
+		69122B4B2689A0FE006C4205 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		69122B4D2689A5C6006C4205 /* PayoutCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayoutCompletedView.swift; sourceTree = "<group>"; };
 		6926D3A8268884CB003A32CF /* CardsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsApi.swift; sourceTree = "<group>"; };
 		6926D3AA26888F63003A32CF /* config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = config.swift; sourceTree = "<group>"; };
 		693442732688906400339CC3 /* PaymentsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsApi.swift; sourceTree = "<group>"; };
@@ -108,6 +114,9 @@
 				6943C96D2684859C00A120D6 /* EazyColors.swift */,
 				6943C96B2684857600A120D6 /* DashboardView.swift */,
 				6911B7052688729F00694D60 /* StartScreen.swift */,
+				69122B4926899F87006C4205 /* PayoutView.swift */,
+				69122B4D2689A5C6006C4205 /* PayoutCompletedView.swift */,
+				69122B4B2689A0FE006C4205 /* Buttons.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -184,11 +193,14 @@
 				693442762688906C00339CC3 /* PayoutsApi.swift in Sources */,
 				6976D2872681D60E00E50002 /* ContentView.swift in Sources */,
 				6943C96C2684857600A120D6 /* DashboardView.swift in Sources */,
+				69122B4C2689A0FE006C4205 /* Buttons.swift in Sources */,
 				6911B7062688729F00694D60 /* StartScreen.swift in Sources */,
 				6926D3A9268884CB003A32CF /* CardsApi.swift in Sources */,
 				6911B70A268876C200694D60 /* AppState.swift in Sources */,
 				693442742688906400339CC3 /* PaymentsApi.swift in Sources */,
 				693442782688C0E200339CC3 /* RequestBuilder.swift in Sources */,
+				69122B4A26899F87006C4205 /* PayoutView.swift in Sources */,
+				69122B4E2689A5C6006C4205 /* PayoutCompletedView.swift in Sources */,
 				6926D3AB26888F63003A32CF /* config.swift in Sources */,
 				6943C96E2684859C00A120D6 /* EazyColors.swift in Sources */,
 				6976D2852681D60E00E50002 /* eazyApp.swift in Sources */,

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DashboardView: View {
     @State private var showPayoutMessage = false
+    @State private var showPayoutModal = false
     let transactions = ["tx1", "tx2", "tx3", "tx4", "tx5"]
 
     var body: some View {
@@ -38,6 +39,14 @@ struct DashboardView: View {
             }
             MessageView()
                 .offset(x: 0, y: showPayoutMessage ? 0 : -150)
+                .onTapGesture {
+                    showPayoutModalScreen()
+                }
+                .sheet(isPresented: $showPayoutModal, content: {
+                    NavigationView {
+                        PayoutView()
+                    }
+                })
         }
         .onAppear() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -52,6 +61,12 @@ struct DashboardView: View {
     private func togglePayoutMessage() {
         withAnimation {
             self.showPayoutMessage.toggle()
+        }
+    }
+
+    private func showPayoutModalScreen() {
+        withAnimation {
+            self.showPayoutModal = true
         }
     }
 }
