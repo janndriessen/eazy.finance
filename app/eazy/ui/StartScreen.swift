@@ -14,20 +14,20 @@ struct StartScreen: View {
             Text("eazy.finance 🕶")
                 .font(.system(size: 44, design: .rounded).bold())
                 .padding()
+                .padding(.top, -64)
+            Text("Borrowing/earning money is easy with eazy.finance")
+                .font(.system(.title, design: .rounded))
+                .multilineTextAlignment(.center)
             Spacer()
-            Text("Powered by")
-                .padding(.bottom, 8)
-            HStack {
-                Image("compound-logo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 40)
-                Image("circle-logo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 36)
+            Text("Just supply money and start earning or borrowing.")
+                .font(.system(.subheadline, design: .rounded))
+                .multilineTextAlignment(.center)
+            EazyDarkButton(title: "Start now")  {
+                print("start")
             }
+            .padding()
         }
+        .padding()
     }
 }
 

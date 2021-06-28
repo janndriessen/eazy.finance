@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         switch appStateManager.appState {
         case .loading:
-            StartScreen()
+            LaunchView()
                 .transition(.opacity)
                 .onAppear {
                     showOnboarding()
@@ -24,7 +24,7 @@ struct ContentView: View {
                 .transition(.opacity)
                 .environmentObject(appStateManager)
         case .onboarding:
-            DashboardView()
+            StartScreen()
                 .animation(.easeIn)
                 .transition(.opacity)
                 .environmentObject(appStateManager)
