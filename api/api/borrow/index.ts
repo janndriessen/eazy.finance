@@ -6,14 +6,14 @@ const compound = new Compound("http://127.0.0.1:8545", {
     "0xb8c1b5c1d81f9475fdf2e334517d29f733bdfa40682207571b12fc1142cbf329"
 });
 
-async function supplyUSDC(amount: number) {
+async function borrowUSDC(amount: number) {
   try {
     if (isNaN(amount) || amount === 0) {
       throw Error("insufficuent amount");
     }
     const asset = Compound.USDC;
-    const trx = await compound.supply(asset, amount);
-    console.log("Supply", asset, amount);
+    const trx = await compound.borrow(asset, amount);
+    console.log("Borrow", asset, amount);
     console.log(trx.hash);
     return {
       trx: trx.hash,
@@ -34,7 +34,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     return;
   }
 
-  const { trx, error } = await supplyUSDC(req.body.amount);
+  const { trx, error } = await borrowUSDC(req.body.amount);
   res.json({
     trx,
     error
