@@ -2,6 +2,7 @@
   "name": "eazy-finance-api",
   "version": "1.0.0",
   "scripts": {
+    "seed": "node tests/seed-usdc.js",
     "dev": "tsc compound.ts && node compound.js",
     "dev-chain": "tsc blockchain.ts && node blockchain.js"
   },
