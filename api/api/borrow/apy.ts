@@ -18,11 +18,11 @@ async function calculateApy(asset: string) {
   const blocksPerDay = (60 * 60 * 24) / 13.15; // ~13.15 second block time
   const daysPerYear = 365;
 
-  const supplyApy =
+  const borrowApy =
     (Math.pow((+srpb.toString() / mantissa) * blocksPerDay + 1, daysPerYear) -
       1) *
     100;
-  return supplyApy;
+  return borrowApy;
 }
 
 export default async (_: VercelRequest, res: VercelResponse) => {
