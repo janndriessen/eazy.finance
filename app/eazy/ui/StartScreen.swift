@@ -10,24 +10,29 @@ import SwiftUI
 struct StartScreen: View {
     var body: some View {
         VStack {
-            Spacer()
-            Text("eazy.finance 🕶")
-                .font(.system(size: 44, design: .rounded).bold())
-                .padding()
-                .padding(.top, -64)
-            Text("Borrowing/earning money is easy with eazy.finance")
-                .font(.system(.title, design: .rounded))
-                .multilineTextAlignment(.center)
-            Spacer()
-            Text("Just supply money and start earning or borrowing.")
-                .font(.system(.subheadline, design: .rounded))
-                .multilineTextAlignment(.center)
-            EazyDarkButton(title: "Start now")  {
-                print("start")
+            LinearGradient(
+                gradient: Gradient(colors: [EazyColor.highlight, .white]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .edgesIgnoringSafeArea(.top)
+            .padding(.bottom, 128)
+            VStack(alignment: .leading) {
+                Text("eazy.finance 🕶")
+                    .font(.system(size: 44, design: .rounded).bold())
+                    .foregroundColor(EazyColor.title)
+                    .padding(.top, -64)
+                Text("Borrowing and earning is easy with us. Supply money now and get started.")
+                    .font(.system(.title, design: .rounded))
+                    .multilineTextAlignment(.leading)
+                    .padding(.bottom, 32)
+                EazyDarkButton(title: "Start now")  {
+                    print("start")
+                }
+                .padding(.vertical)
             }
             .padding()
         }
-        .padding()
     }
 }
 

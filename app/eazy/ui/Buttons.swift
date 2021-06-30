@@ -64,6 +64,13 @@ struct EazyDarkButtonStyle: ButtonStyle {
             .frame(minWidth: 0, maxWidth: .infinity)
             .frame(height: 56)
             .background(EazyColor.title)
+//            .background(
+//                LinearGradient(
+//                    gradient: Gradient(colors: [EazyColor.highlight.opacity(0.8), EazyColor.highlight.opacity(0.8), EazyColor.highlight]),
+//                    startPoint: .top,
+//                    endPoint: .bottom
+//                )
+//            )
             .foregroundColor(.white)
             .clipShape(RoundedRectangle(cornerRadius: 15.0))
             .scaleEffect(configuration.isPressed ? 1.05 : 1)
