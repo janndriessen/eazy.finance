@@ -16,7 +16,12 @@ struct PayoutView: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            EazyColor.title.edgesIgnoringSafeArea(.all)
+            LinearGradient(
+                gradient: Gradient(colors: [EazyColor.highlight, EazyColor.highlight, EazyColor.title]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .edgesIgnoringSafeArea(.all)
             VStack {
                 NavigationLink(destination: PayoutCompletedView {
                     presentationMode.wrappedValue.dismiss()
