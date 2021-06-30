@@ -26,7 +26,7 @@ struct StartScreen: View {
                     .font(.system(.title, design: .rounded))
                     .multilineTextAlignment(.leading)
                     .padding(.bottom, 32)
-                EazyDarkButton(title: "Start now")  {
+                EazyDarkButton(title: "Start Now")  {
                     print("start")
                 }
                 .padding(.vertical)

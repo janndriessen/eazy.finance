@@ -34,7 +34,7 @@ struct EazyDarkButton: View {
         Button(action: action) {
             if isLoading {
                 ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: EazyColor.title))
+                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
             } else {
                 Text(title)
             }
