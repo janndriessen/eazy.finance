@@ -27,6 +27,8 @@
 		69D43A24268C649000401501 /* OnboardingBorrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D43A23268C649000401501 /* OnboardingBorrowView.swift */; };
 		69D43A26268C65BA00401501 /* OnboardingCollateralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D43A25268C65BA00401501 /* OnboardingCollateralView.swift */; };
 		69D43A28268C667100401501 /* AddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D43A27268C667100401501 /* AddCardView.swift */; };
+		69D43A2A268D090500401501 /* BorrowApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D43A29268D090500401501 /* BorrowApi.swift */; };
+		69D43A2C268D7F4900401501 /* OnboardingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D43A2B268D7F4900401501 /* OnboardingContainerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		69D43A23268C649000401501 /* OnboardingBorrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingBorrowView.swift; sourceTree = "<group>"; };
 		69D43A25268C65BA00401501 /* OnboardingCollateralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollateralView.swift; sourceTree = "<group>"; };
 		69D43A27268C667100401501 /* AddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardView.swift; sourceTree = "<group>"; };
+		69D43A29268D090500401501 /* BorrowApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorrowApi.swift; sourceTree = "<group>"; };
+		69D43A2B268D7F4900401501 /* OnboardingContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingContainerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,7 @@
 		69A489A2268881F40096AAB3 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				69D43A29268D090500401501 /* BorrowApi.swift */,
 				6926D3A8268884CB003A32CF /* CardsApi.swift */,
 				693442732688906400339CC3 /* PaymentsApi.swift */,
 				693442752688906C00339CC3 /* PayoutsApi.swift */,
@@ -126,6 +131,7 @@
 				6911B7052688729F00694D60 /* StartScreen.swift */,
 				69122B4926899F87006C4205 /* PayoutView.swift */,
 				69122B4D2689A5C6006C4205 /* PayoutCompletedView.swift */,
+				69D43A2B268D7F4900401501 /* OnboardingContainerView.swift */,
 				69D43A23268C649000401501 /* OnboardingBorrowView.swift */,
 				69D43A25268C65BA00401501 /* OnboardingCollateralView.swift */,
 				69D43A27268C667100401501 /* AddCardView.swift */,
@@ -212,12 +218,14 @@
 				69D43A26268C65BA00401501 /* OnboardingCollateralView.swift in Sources */,
 				69D43A28268C667100401501 /* AddCardView.swift in Sources */,
 				6926D3A9268884CB003A32CF /* CardsApi.swift in Sources */,
+				69D43A2A268D090500401501 /* BorrowApi.swift in Sources */,
 				6911B70A268876C200694D60 /* AppState.swift in Sources */,
 				693442742688906400339CC3 /* PaymentsApi.swift in Sources */,
 				693442782688C0E200339CC3 /* RequestBuilder.swift in Sources */,
 				69122B4A26899F87006C4205 /* PayoutView.swift in Sources */,
 				69122B4E2689A5C6006C4205 /* PayoutCompletedView.swift in Sources */,
 				6926D3AB26888F63003A32CF /* config.swift in Sources */,
+				69D43A2C268D7F4900401501 /* OnboardingContainerView.swift in Sources */,
 				6943C96E2684859C00A120D6 /* EazyColors.swift in Sources */,
 				6976D2852681D60E00E50002 /* eazyApp.swift in Sources */,
 			);

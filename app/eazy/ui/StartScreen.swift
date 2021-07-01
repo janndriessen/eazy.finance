@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct StartScreen: View {
+    @EnvironmentObject private var stateManager: OnboardingStateManager
+
     var body: some View {
         VStack {
             LinearGradient(
@@ -28,6 +30,7 @@ struct StartScreen: View {
                     .padding(.bottom, 32)
                 EazyDarkButton(title: "Start Now")  {
                     print("start")
+                    stateManager.next()
                 }
                 .padding(.vertical)
             }

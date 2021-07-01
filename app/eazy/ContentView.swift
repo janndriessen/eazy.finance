@@ -24,7 +24,7 @@ struct ContentView: View {
                 .transition(.opacity)
                 .environmentObject(appStateManager)
         case .onboarding:
-            StartScreen()
+            OnboardingContainerView()
                 .animation(.easeIn)
                 .transition(.opacity)
                 .environmentObject(appStateManager)
@@ -39,7 +39,6 @@ struct ContentView: View {
         }
     }
 }
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

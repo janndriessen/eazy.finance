@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OnboardingBorrowView: View {
+    @EnvironmentObject private var stateManager: OnboardingStateManager
     @State private var isLoading = false
     @State private var isLinkActive = false
 
@@ -27,13 +28,13 @@ struct OnboardingBorrowView: View {
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                     .padding(.top, 16)
-                Text("Select your preferred way of receiving it.")
+                Text("Enter an amount. Below you'll find how much you need to supply as collateral.")
                     .font(.system(size: 16, design: .rounded))
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                     .padding()
                 VStack {
-                    Text("$1,000")
+                    Text("$0")
                         .font(.system(size: 48, design: .rounded))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -42,15 +43,42 @@ struct OnboardingBorrowView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 25.0)
                                 .fill(EazyColor.text.opacity(0.6)))
-                    Text("1,000 USDC")
-                        .font(.system(size: 24, design: .rounded))
-                        .foregroundColor(EazyColor.text)
-                        .multilineTextAlignment(.center)
+                    Text("Collateral: $1,000")
+                        .bold()
+                        .foregroundColor(.white)
+                    HStack {
+                        Text("$100")
+                            .font(.system(size: 22, design: .rounded))
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 25.0)
+                                    .fill(EazyColor.text.opacity(0.2)))
+                        Text("$500")
+                            .font(.system(size: 22, design: .rounded))
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 25.0)
+                                    .fill(EazyColor.text.opacity(0.2)))
+                        Text("$1,000")
+                            .font(.system(size: 22, design: .rounded))
+                            .foregroundColor(.white)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 25.0)
+                                    .fill(EazyColor.text.opacity(0.2)))
+                    }
+                    .padding(.vertical, 8)
                 }
                 .padding(.top, 32)
                 Spacer()
                 EazyButton(title: "Supply Collateral") {
                     print("Send to ETH address")
+                    stateManager.next()
                 }
                 .padding(.bottom, 8)
                 .padding(.horizontal, 16)
