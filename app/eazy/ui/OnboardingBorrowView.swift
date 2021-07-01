@@ -9,10 +9,11 @@ import SwiftUI
 
 struct OnboardingBorrowView: View {
     @EnvironmentObject private var stateManager: OnboardingStateManager
+    @State private var borrowAmount: Int = 0
+    @State private var collateral = "n/a"
     @State private var isLoading = false
     @State private var isLinkActive = false
-
-    private var payoutsApi = PayoutsApi()
+    private var borrowApi = BorrowApi()
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -34,7 +35,7 @@ struct OnboardingBorrowView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                 VStack {
-                    Text("$0")
+                    Text(formatNumber(amount: borrowAmount))
                         .font(.system(size: 48, design: .rounded))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -43,7 +44,8 @@ struct OnboardingBorrowView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 25.0)
                                 .fill(EazyColor.text.opacity(0.6)))
-                    Text("Collateral: $1,000")
+                    Text("Collateral: \(collateral)")
+                        .font(.system(size: 22, design: .rounded))
                         .bold()
                         .foregroundColor(.white)
                     HStack {
@@ -55,6 +57,9 @@ struct OnboardingBorrowView: View {
                             .background(
                                 RoundedRectangle(cornerRadius: 25.0)
                                     .fill(EazyColor.text.opacity(0.2)))
+                            .onTapGesture {
+                                getCollateral(amount: 100)
+                            }
                         Text("$500")
                             .font(.system(size: 22, design: .rounded))
                             .foregroundColor(.white)
@@ -63,6 +68,9 @@ struct OnboardingBorrowView: View {
                             .background(
                                 RoundedRectangle(cornerRadius: 25.0)
                                     .fill(EazyColor.text.opacity(0.2)))
+                            .onTapGesture {
+                                getCollateral(amount: 500)
+                            }
                         Text("$1,000")
                             .font(.system(size: 22, design: .rounded))
                             .foregroundColor(.white)
@@ -71,6 +79,9 @@ struct OnboardingBorrowView: View {
                             .background(
                                 RoundedRectangle(cornerRadius: 25.0)
                                     .fill(EazyColor.text.opacity(0.2)))
+                            .onTapGesture {
+                                getCollateral(amount: 1000)
+                            }
                     }
                     .padding(.vertical, 8)
                 }
@@ -90,12 +101,21 @@ struct OnboardingBorrowView: View {
         }
     }
 
-    private func payout() {
-        print("Send to bank account")
+    private func getCollateral(amount: Int) {
+        self.borrowAmount = amount
         self.isLoading.toggle()
-        payoutsApi.payout(amount: "1000") {
-            isLinkActive = true
+        borrowApi.getCollateral(for: amount) { result in
+            switch result {
+            case .success(let collateralNeeded):
+                self.collateral = formatNumber(amount: collateralNeeded)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
+    }
+
+    private func formatNumber(amount: Int) -> String {
+        return "$\(amount)"
     }
 }
 
