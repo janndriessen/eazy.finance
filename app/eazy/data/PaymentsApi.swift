@@ -13,8 +13,8 @@ final class PaymentsApi: ObservableObject {
 
     func checkPayment(with paymentId: String) {
         let path = "/payments/\(paymentId)"
-        let requestBuilder = RequestBuilder()
-        guard let request = requestBuilder.buildCircleApiRequest(for: path, method: .get) else { return }
+        let requestBuilder = CircleRequestBuilder()
+        guard let request = requestBuilder.buildRequest(for: path, method: .get) else { return }
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
             if let error = error {
                 print("Error testing api request: \(error)")
@@ -38,8 +38,8 @@ final class PaymentsApi: ObservableObject {
 
     func createPayment() {
             let path = "/payments"
-            let requestBuilder = RequestBuilder()
-            guard let request = requestBuilder.buildCircleApiRequest(for: path, method: .get) else { return }
+            let requestBuilder = CircleRequestBuilder()
+            guard let request = requestBuilder.buildRequest(for: path, method: .get) else { return }
             let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
                 if let error = error {
                     print("Error testing api request: \(error)")
@@ -63,9 +63,9 @@ final class PaymentsApi: ObservableObject {
 
     func getPublicKey() {
         let path = "/encryption/public"
-        let requestBuilder = RequestBuilder()
-        guard let request = requestBuilder.buildCircleApiRequest(for: path, method: .get) else { return }
-        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
+        let requestBuilder = CircleRequestBuilder()
+        guard let request = requestBuilder.buildRequest(for: path, method: .get) else { return }
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
             if let error = error {
                 print("Error testing api request: \(error)")
                 return

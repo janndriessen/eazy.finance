@@ -58,8 +58,8 @@ final class CardsApi: ObservableObject {
 
     func testAuth() {
         let path = "/configuration"
-        let requestBuilder = RequestBuilder()
-        guard let request = requestBuilder.buildCircleApiRequest(for: path, method: .get) else { return }
+        let requestBuilder = CircleRequestBuilder()
+        guard let request = requestBuilder.buildRequest(for: path, method: .get) else { return }
 
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
             if let error = error {

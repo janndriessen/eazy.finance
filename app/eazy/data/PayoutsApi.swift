@@ -14,8 +14,8 @@ final class PayoutsApi: ObservableObject {
         let payload = PayoutPayload.getPayload(for: amount)
         let payloadData = try? JSONEncoder().encode(payload)
 
-        let requestBuilder = RequestBuilder()
-        guard let request = requestBuilder.buildCircleApiRequest(for: payoutPath, method: .post, payload: payloadData) else { return }
+        let requestBuilder = CircleRequestBuilder()
+        guard let request = requestBuilder.buildRequest(for: payoutPath, method: .post, payload: payloadData) else { return }
 
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
             if let error = error {
