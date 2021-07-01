@@ -14,8 +14,6 @@ struct OnboardingContainerView: View {
         switch stateManager.onboardingState {
         case .start:
             StartScreen()
-                .animation(.easeOut)
-                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                 .environmentObject(stateManager)
         case .borrow:
             OnboardingBorrowView()
@@ -23,10 +21,14 @@ struct OnboardingContainerView: View {
                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                 .environmentObject(stateManager)
         case .supply:
-            OnboardingCollateralView()
+            OnboardingCollateralView(amount: stateManager.borrowAmount, collateral: stateManager.collateral)
                 .animation(.easeOut)
                 .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                 .environmentObject(stateManager)
+        case .transaction:
+            OnboardingTransactionView()
+                .animation(.easeIn)
+                .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
         }
     }
 }
@@ -41,10 +43,13 @@ enum OnboardingState {
     case start
     case borrow
     case supply
+    case transaction
 }
 
 final class OnboardingStateManager: ObservableObject {
     @Published var onboardingState: OnboardingState = .start
+    var borrowAmount: Int = 0
+    var collateral: Int = 0
 
     init() {}
 
@@ -52,10 +57,18 @@ final class OnboardingStateManager: ObservableObject {
         switch onboardingState {
         case .start:
             showBorrow()
-        case .borrow:
-            showSupply()
+        case .supply:
+            showTransaction()
         default:
             break
+        }
+    }
+
+    func showSupply(for borrowAmount: Int, collateral: Int) {
+        self.borrowAmount = borrowAmount
+        self.collateral = collateral
+        withAnimation {
+            onboardingState = .supply
         }
     }
 }
@@ -67,9 +80,9 @@ extension OnboardingStateManager {
         }
     }
 
-    private func showSupply() {
+    private func showTransaction() {
         withAnimation {
-            onboardingState = .supply
+            onboardingState = .transaction
         }
     }
 }

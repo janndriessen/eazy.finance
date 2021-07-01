@@ -40,15 +40,18 @@ final class CardsApi: ObservableObject {
                 return
             }
 
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
-                print("Error with the response, unexpected status code: \(response)")
-                return
-            }
+            // TODO:
+//            guard let httpResponse = response as? HTTPURLResponse,
+//                  (200...299).contains(httpResponse.statusCode) else {
+//                print("Error with the response, unexpected status code")
+//                return
+//            }
 
             print("created")
-            let createdCard = Card(name: "Satoshi Nakamoto", cardType: "Visa", number: "4111111111111", expires: "01/22")
-            self.cards = [createdCard]
+            DispatchQueue.main.async {
+                let createdCard = Card(name: "Satoshi Nakamoto", cardType: "Visa", number: "4200 **** **** 0000", expires: "01/22")
+                self.cards = [createdCard]
+            }
 //            if let data = data {
 //                let result = try? JSONDecoder().decode(CreateCardResponse.self, from: data)
 //            }
@@ -69,7 +72,7 @@ final class CardsApi: ObservableObject {
 
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
-                print("Error with the response, unexpected status code: \(response)")
+                print("Error with the response, unexpected status code")
                 return
             }
 

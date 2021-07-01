@@ -10,7 +10,7 @@ import SwiftUI
 struct OnboardingBorrowView: View {
     @EnvironmentObject private var stateManager: OnboardingStateManager
     @State private var borrowAmount: Int = 0
-    @State private var collateral = "n/a"
+    @State private var collateral: Int = -1
     @State private var isLoading = false
     @State private var isLinkActive = false
     private var borrowApi = BorrowApi()
@@ -44,7 +44,7 @@ struct OnboardingBorrowView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 25.0)
                                 .fill(EazyColor.text.opacity(0.6)))
-                    Text("Collateral: \(collateral)")
+                    Text("Collateral: \(collateral == -1 ? "" : formatNumber(amount: collateral))")
                         .font(.system(size: 22, design: .rounded))
                         .bold()
                         .foregroundColor(.white)
@@ -88,8 +88,7 @@ struct OnboardingBorrowView: View {
                 .padding(.top, 32)
                 Spacer()
                 EazyButton(title: "Supply Collateral") {
-                    print("Send to ETH address")
-                    stateManager.next()
+                    stateManager.showSupply(for: 500, collateral: collateral)
                 }
                 .padding(.bottom, 8)
                 .padding(.horizontal, 16)
@@ -107,7 +106,7 @@ struct OnboardingBorrowView: View {
         borrowApi.getCollateral(for: amount) { result in
             switch result {
             case .success(let collateralNeeded):
-                self.collateral = formatNumber(amount: collateralNeeded)
+                self.collateral = collateralNeeded
             case .failure(let error):
                 print(error.localizedDescription)
             }

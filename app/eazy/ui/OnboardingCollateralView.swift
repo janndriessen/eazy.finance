@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct OnboardingCollateralView: View {
+    var amount: Int
+    var collateral: Int
+
+    @EnvironmentObject private var stateManager: OnboardingStateManager
     @State private var cardAdded = false
     @State private var isLoading = false
+    @State private var isPresenting = false
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -25,13 +30,13 @@ struct OnboardingCollateralView: View {
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                     .padding(.top, 16)
-                Text("Supply the stated amount via your preferred payment method to borrow $1,000.")
+                Text("Supply the stated amount via your preferred payment method to borrow $\(amount).")
                     .font(.system(size: 16, design: .rounded))
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                     .padding()
                 VStack {
-                    Text("$1,000")
+                    Text("$\(collateral)")
                         .font(.system(size: 48, design: .rounded))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -40,15 +45,21 @@ struct OnboardingCollateralView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 25.0)
                                 .fill(EazyColor.text.opacity(0.6)))
-                    Text("1,000 USDC")
+                    Text("\(collateral) USDC")
                         .font(.system(size: 24, design: .rounded))
                         .foregroundColor(EazyColor.text)
                         .multilineTextAlignment(.center)
                 }
                 .padding(.top, 32)
                 Spacer()
-                EazyButton(title: "Add Credit Card") {
+                EazyButton(title: cardAdded ? "Supply Collateral" : "Add Credit Card") {
                     print("Send to ETH address")
+                    if cardAdded {
+                        // TODO: payment call
+                        stateManager.next()
+                    } else {
+                        isPresenting.toggle()
+                    }
                 }
                 .padding(.bottom, 8)
                 .padding(.horizontal, 16)
@@ -58,11 +69,18 @@ struct OnboardingCollateralView: View {
             }
             .padding()
         }
+        .sheet(isPresented: $isPresenting, onDismiss: {
+            self.cardAdded = true
+        }, content: {
+            NavigationView {
+                AddCardView()
+            }
+        })
     }
 }
 
 struct OnboardingCollateralView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingCollateralView()
+        OnboardingCollateralView(amount: 500, collateral: 750)
     }
 }
