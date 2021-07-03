@@ -23,6 +23,7 @@ struct AddCardView: View {
                             .foregroundColor(EazyColor.title)
                         Spacer()
                     }
+                    .padding(.top, 32)
                     CardView(
                         cardType: card?.cardType ?? "",
                         number: card?.number ?? "",

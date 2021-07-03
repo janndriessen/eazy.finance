@@ -16,6 +16,8 @@ struct OnboardingCollateralView: View {
     @State private var isLoading = false
     @State private var isPresenting = false
 
+    private let paymentsApi = PaymentsApi()
+
     var body: some View {
         ZStack(alignment: .top) {
             LinearGradient(
@@ -53,10 +55,19 @@ struct OnboardingCollateralView: View {
                 .padding(.top, 32)
                 Spacer()
                 EazyButton(title: cardAdded ? "Supply Collateral" : "Add Credit Card") {
-                    print("Send to ETH address")
                     if cardAdded {
-                        // TODO: payment call
-                        stateManager.next()
+                        paymentsApi.createPayment(amount: amount) { result in
+                            DispatchQueue.main.async {
+                                switch result {
+                                case .success(let success):
+                                    if success {
+                                        stateManager.next()
+                                    }
+                                case .failure(let error):
+                                    print(error)
+                                }
+                            }
+                        }
                     } else {
                         isPresenting.toggle()
                     }

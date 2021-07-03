@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,6 +24,7 @@
 		6976D2892681D60F00E50002 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6976D2882681D60F00E50002 /* Assets.xcassets */; };
 		6976D28C2681D60F00E50002 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6976D28B2681D60F00E50002 /* Preview Assets.xcassets */; };
 		69823936268DB9C2004138FF /* OnboardingTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69823935268DB9C2004138FF /* OnboardingTransactionView.swift */; };
+		69823939269043A1004138FF /* ObjectivePGP in Frameworks */ = {isa = PBXBuildFile; productRef = 69823938269043A1004138FF /* ObjectivePGP */; };
 		69AEBD4C2689CEE70064CB78 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69AEBD4B2689CEE70064CB78 /* LaunchView.swift */; };
 		69D43A24268C649000401501 /* OnboardingBorrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D43A23268C649000401501 /* OnboardingBorrowView.swift */; };
 		69D43A26268C65BA00401501 /* OnboardingCollateralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D43A25268C65BA00401501 /* OnboardingCollateralView.swift */; };
@@ -65,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69823939269043A1004138FF /* ObjectivePGP in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +160,9 @@
 			dependencies = (
 			);
 			name = eazy;
+			packageProductDependencies = (
+				69823938269043A1004138FF /* ObjectivePGP */,
+			);
 			productName = eazy;
 			productReference = 6976D2812681D60E00E50002 /* eazy.app */;
 			productType = "com.apple.product-type.application";
@@ -185,6 +190,9 @@
 				Base,
 			);
 			mainGroup = 6976D2782681D60E00E50002;
+			packageReferences = (
+				69823937269043A0004138FF /* XCRemoteSwiftPackageReference "ObjectivePGP" */,
+			);
 			productRefGroup = 6976D2822681D60E00E50002 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -420,6 +428,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		69823937269043A0004138FF /* XCRemoteSwiftPackageReference "ObjectivePGP" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/ObjectivePGP";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.17.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		69823938269043A1004138FF /* ObjectivePGP */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 69823937269043A0004138FF /* XCRemoteSwiftPackageReference "ObjectivePGP" */;
+			productName = ObjectivePGP;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6976D2792681D60E00E50002 /* Project object */;
 }
