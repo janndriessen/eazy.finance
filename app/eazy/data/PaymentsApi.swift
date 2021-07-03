@@ -8,6 +8,11 @@
 import Foundation
 import ObjectivePGP
 
+enum PaymentsApiError: Error {
+    case buildingRequestFailed(path: String)
+    case unexpected(message: String)
+}
+
 final class PaymentsApi: ObservableObject {
     private let baseUrl = EazyConfig.circleSandboxBaseUrl
     private let sandboxApiKey = EazyConfig.circleSandboxApiKey
@@ -18,28 +23,35 @@ final class PaymentsApi: ObservableObject {
         getPublicKey()
     }
 
-    func checkPayment(with paymentId: String) {
+    func checkPaymentStatus(for paymentId: String, completion: @escaping (Result<Bool, Error>) -> Void) {
         let path = "/payments/\(paymentId)"
+
         let requestBuilder = CircleRequestBuilder()
-        guard let request = requestBuilder.buildRequest(for: path, method: .get) else { return }
+        guard let request = requestBuilder.buildRequest(for: path, method: .get) else {
+            completion(.failure(PaymentsApiError.buildingRequestFailed(path: path)))
+            return
+        }
 
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
             if let error = error {
-                print("Error testing api request: \(error)")
+                completion(.failure(PaymentsApiError.unexpected(message: "Error testing api request: \(error)")))
                 return
             }
 
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
-                print("Error with the response, unexpected status code")
+                completion(.failure(PaymentsApiError.unexpected(message: "Error with the response, unexpected status code")))
                 return
             }
 
-            print("works")
             if let data = data {
                 let result = try? JSONDecoder().decode(PaymentStatusResponse.self, from: data)
-                print(result)
+                print(result ?? "")
+                completion(.success(result != nil))
+                return
             }
+
+            completion(.success(false))
         })
         task.resume()
     }

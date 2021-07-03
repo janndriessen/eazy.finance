@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct DashboardView: View {
+    @State private var notificationMessage = "Your borrowed money is ready for payout.\nTap here to send it."
     @State private var showPayoutMessage = false
     @State private var showPayoutModal = false
     let transactions = ["tx1", "tx2", "tx3", "tx4", "tx5"]
+
+    private let paymentsApi = PaymentsApi()
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -37,9 +40,10 @@ struct DashboardView: View {
                 }
                 .padding()
             }
-            MessageView()
+            MessageView(message: notificationMessage)
                 .offset(x: 0, y: showPayoutMessage ? 0 : -150)
                 .onTapGesture {
+                    showPayoutMessage.toggle()
                     showPayoutModalScreen()
                 }
                 .sheet(isPresented: $showPayoutModal, content: {
@@ -49,10 +53,21 @@ struct DashboardView: View {
                 })
         }
         .onAppear() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                togglePayoutMessage()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    togglePayoutMessage()
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                togglePayoutMessage()
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                    togglePayoutMessage()
+//                }
+//            }
+            paymentsApi.checkPaymentStatus(for: "7478d655-7c80-40df-b90d-e92767d0c037") { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .failure(let error):
+                        print(error)
+                    case .success(_):
+                        self.notificationMessage = "You're payment was accepted. Tap here\nfor more details."
+                        self.showPayoutMessage.toggle()
+                    }
                 }
             }
         }
@@ -78,9 +93,11 @@ struct DashboardView_Previews: PreviewProvider {
 }
 
 private struct MessageView: View {
+    var message: String
+
     var body: some View {
         VStack(alignment: .center) {
-            Text("Your borrowed money is ready for payout.\nTap here to send it.")
+            Text(message)
                 .font(.system(.subheadline, design: .rounded))
                 .fixedSize()
                 .foregroundColor(.white)
