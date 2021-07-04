@@ -33,6 +33,7 @@ extension Transaction {
 }
 
 struct DashboardView: View {
+    @ObservedObject private var apyApi = ApyApi()
     @State private var notificationMessage = "Your borrowed money is ready for payout.\nTap here to send it."
     @State private var showPayoutMessage = false
     @State private var showPayoutModal = false
@@ -57,8 +58,8 @@ struct DashboardView: View {
                             }
                     }
                     .padding()
-                    BorrowView(apy: "3.10%")
-                    EarnView(apy: "2.03%")
+                    BorrowView(apy: apyApi.borrowApy)
+                    EarnView(apy: apyApi.supplyApy)
                     TransactionsHeaderView()
                         .padding()
                     ForEach(transactions, id: \.id) { transaction in
@@ -80,6 +81,7 @@ struct DashboardView: View {
                 })
         }
         .onAppear() {
+            apyApi.fetch()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 togglePayoutMessage()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
