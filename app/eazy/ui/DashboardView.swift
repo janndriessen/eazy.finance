@@ -7,11 +7,36 @@
 
 import SwiftUI
 
+enum TransactionState: String {
+    case cancelled
+    case completed
+    case pending
+}
+
+struct Transaction: Hashable {
+    let id = UUID()
+    let state: TransactionState
+    let hash: String
+    let time: String
+    let usdc: String
+    let usd: String
+}
+
+extension Transaction {
+    static var transactions: [Transaction] = [
+        Transaction(state: .pending, hash: "0xf2c7ca6...d73f", time: "12:00", usdc: "500", usd: "500"),
+        Transaction(state: .pending, hash: "0xf2c7ca6...d73f", time: "12:00", usdc: "715", usd: "715"),
+        Transaction(state: .completed, hash: "0xf2c7ca6...d73f", time: "12:00", usdc: "-715", usd: "-715"),
+        Transaction(state: .cancelled, hash: "0xf2c7ca6...d73f", time: "12:00", usdc: "-715", usd: "-715"),
+        Transaction(state: .cancelled, hash: "0xf2c7ca6...d73f", time: "12:00", usdc: "-1,000", usd: "-1,000"),
+    ]
+}
+
 struct DashboardView: View {
     @State private var notificationMessage = "Your borrowed money is ready for payout.\nTap here to send it."
     @State private var showPayoutMessage = false
     @State private var showPayoutModal = false
-    let transactions = ["tx1", "tx2", "tx3", "tx4", "tx5"]
+    let transactions = Transaction.transactions
 
     private let paymentsApi = PaymentsApi()
 
@@ -21,12 +46,14 @@ struct DashboardView: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     HStack(alignment: .bottom) {
-                        Text("Hi Alice/Bob 👋🏼🕶")
+                        Text("Hi Alice 👋🏼🕶")
                             .font(.system(.title, design: .rounded))
                         Spacer()
                         Text("💳")
                             .onTapGesture {
-                                CardsApi().testAuth()
+//                                CardsApi().testAuth()
+//                                PayoutsApi().payout(amount: "1000")
+//                                PaymentsApi().checkPayment(with: "fc988ed5-c129-4f70-a064-e5beb7eb8e32")
                             }
                     }
                     .padding()
@@ -34,8 +61,8 @@ struct DashboardView: View {
                     EarnView(apy: "2.03%")
                     TransactionsHeaderView()
                         .padding()
-                    ForEach(transactions, id: \.self) { _ in
-                        TransactionListItem()
+                    ForEach(transactions, id: \.id) { transaction in
+                        TransactionListItem(transaction: transaction)
                     }
                 }
                 .padding()
@@ -53,23 +80,23 @@ struct DashboardView: View {
                 })
         }
         .onAppear() {
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//                togglePayoutMessage()
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                    togglePayoutMessage()
-//                }
-//            }
-            paymentsApi.checkPaymentStatus(for: "7478d655-7c80-40df-b90d-e92767d0c037") { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .failure(let error):
-                        print(error)
-                    case .success(_):
-                        self.notificationMessage = "You're payment was accepted. Tap here\nfor more details."
-                        self.showPayoutMessage.toggle()
-                    }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                togglePayoutMessage()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    togglePayoutMessage()
                 }
             }
+//            paymentsApi.checkPaymentStatus(for: "7478d655-7c80-40df-b90d-e92767d0c037") { result in
+//                DispatchQueue.main.async {
+//                    switch result {
+//                    case .failure(let error):
+//                        print(error)
+//                    case .success(_):
+//                        self.notificationMessage = "You're payment was accepted. Tap here\nfor more details."
+//                        self.showPayoutMessage.toggle()
+//                    }
+//                }
+//            }
         }
     }
 
@@ -140,7 +167,7 @@ private struct BorrowView: View {
                             .font(.system(.subheadline, design: .rounded))
                     }
                     HStack {
-                        Text("$1,000.00")
+                        Text("$1,500.00")
                             .font(.system(.headline, design: .rounded))
                             .padding(8)
                         Text("Collateral")
@@ -233,43 +260,53 @@ private struct TransactionsHeaderView: View {
 }
 
 private struct TransactionListItem: View {
+    var transaction: Transaction
+
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("0xf2c7ca6...d73f")
+                Text(transaction.hash)
                     .font(.system(.body, design: .rounded))
                     .foregroundColor(EazyColor.highlight)
-                Text("12:00")
+                Text(transaction.time)
                     .font(.system(.subheadline, design: .rounded))
                     .foregroundColor(EazyColor.text)
             }
-            Spacer()
-            Spacer()
-            VStack {
-                ZStack(alignment: .center) {
-                    Text("pending")
-                        .font(.system(.footnote, design: .rounded))
-                        .foregroundColor(EazyColor.title.opacity(0.6))
-                        .padding(.vertical, 4)
-                        .padding(.horizontal, 12)
-                        .background(
-                            RoundedRectangle(cornerRadius: 25.0)
-                                .fill(EazyColor.pending.opacity(0.1))
-                        )
-                }
+            VStack(alignment: .leading) {
+                Text(transaction.state.rawValue)
+                    .font(.system(.footnote, design: .rounded))
+                    .foregroundColor(EazyColor.title.opacity(0.6))
+                    .padding(.vertical, 4)
+                    .padding(.horizontal, 12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 25.0)
+                            .fill(getColor(for: transaction.state))
+                    )
                 Spacer()
             }
-            .padding(.trailing, 8)
+            .padding(.leading, 16)
+            Spacer()
             VStack(alignment: .trailing) {
-                Text("1,000 USDC")
+                Text("\(transaction.usdc) USDC")
                     .font(.system(.body, design: .rounded))
                     .foregroundColor(EazyColor.title)
-                Text("$1,000")
+                Text("$\(transaction.usd)")
                     .font(.system(.subheadline, design: .rounded))
                     .foregroundColor(EazyColor.text)
             }
         }
         .padding(.bottom, 16)
         .padding(.horizontal, 8)
+    }
+
+    private func getColor(for state: TransactionState) -> Color {
+        switch state {
+        case .cancelled:
+            return .red.opacity(0.1)
+        case .completed:
+            return .green.opacity(0.1)
+        case .pending:
+            return EazyColor.pending.opacity(0.1)
+        }
     }
 }
