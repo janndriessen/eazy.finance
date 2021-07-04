@@ -13,7 +13,12 @@ struct PayoutCompletedView: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            EazyColor.title.edgesIgnoringSafeArea(.all)
+            LinearGradient(
+                gradient: Gradient(colors: [EazyColor.highlight, EazyColor.highlight, EazyColor.title]),
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .edgesIgnoringSafeArea(.all)
             VStack {
                 Text("Your money is on\nthe way to your\nbank account. 💸")
                     .font(.system(size: 44, design: .rounded))

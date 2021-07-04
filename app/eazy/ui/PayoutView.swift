@@ -71,7 +71,7 @@ struct PayoutView: View {
     private func payout() {
         print("Send to bank account")
         self.isLoading.toggle()
-        payoutsApi.payout(amount: "1000") {
+        payoutsApi.payout(amount: "500") {
             isLinkActive = true
         }
     }
