@@ -34,6 +34,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     return;
   }
 
+  console.log("Supplying USDC to compound.");
   const { trx, error } = await supplyUSDC(req.body.amount);
   res.json({
     trx,

@@ -13,12 +13,15 @@ const abi = [
 ];
 
 export default async (req: VercelRequest, res: VercelResponse) => {
+  console.log("Calculating collateral for borrowing USDC on compound.");
+
   if (req.body === undefined || req.body.amount === undefined) {
     res.status(400).json({ error: "No borrow amount provided." });
     return;
   }
 
   const amount = req.body.amount;
+  // cUSDC
   const cTokenAddress = "0x39AA39c021dfbaE8faC545936693aC917d5E7563";
   const contract = new ethers.Contract(contractAddress, abi, provider);
 

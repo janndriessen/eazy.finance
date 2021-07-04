@@ -26,6 +26,7 @@ async function calculateApy(asset: string) {
 }
 
 export default async (_: VercelRequest, res: VercelResponse) => {
+  console.log("Requesting borrow APY for USDC on compound");
   const asset = "USDC";
   const apy = await calculateApy(asset);
   console.log(apy);
