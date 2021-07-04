@@ -37,7 +37,7 @@ struct PayoutView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                 VStack {
-                    Text("$1,000")
+                    Text("$500")
                         .font(.system(size: 48, design: .rounded))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -46,7 +46,7 @@ struct PayoutView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 25.0)
                                 .fill(EazyColor.text.opacity(0.6)))
-                    Text("1,000 USDC")
+                    Text("500 USDC")
                         .font(.system(size: 24, design: .rounded))
                         .foregroundColor(EazyColor.text)
                         .multilineTextAlignment(.center)

@@ -101,9 +101,9 @@ struct DashboardView: View {
             apyApi.fetch()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 togglePayoutMessage()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    togglePayoutMessage()
-                }
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                    togglePayoutMessage()
+//                }
             }
 //            paymentsApi.checkPaymentStatus(for: "7478d655-7c80-40df-b90d-e92767d0c037") { result in
 //                DispatchQueue.main.async {
