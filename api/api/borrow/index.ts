@@ -6,17 +6,27 @@ const compound = new Compound("http://127.0.0.1:8545", {
     "0xb8c1b5c1d81f9475fdf2e334517d29f733bdfa40682207571b12fc1142cbf329"
 });
 
+// const result = await contract.getAccountLiquidity(walletAddress);
+// const { 0: error, 1: liquidity, 2: shortfall } = result;
+
+// console.log(error);
+// console.log(liquidity, BigNumber.from(liquidity._hex).toString());
+// console.log(shortfall);
 async function borrowUSDC(amount: number) {
+  console.log("Borrowing USDC on compound.");
+
   try {
     if (isNaN(amount) || amount === 0) {
       throw Error("insufficuent amount");
     }
     const asset = Compound.USDC;
-    const trx = await compound.borrow(asset, amount);
+    const trxEnterMarkets = await compound.enterMarkets(asset);
+    const trxBorrow = await compound.borrow(asset, amount);
     console.log("Borrow", asset, amount);
-    console.log(trx.hash);
+    console.log(trxEnterMarkets.hash);
+    console.log(trxBorrow.hash);
     return {
-      trx: trx.hash,
+      trx: trxBorrow.hash,
       error: null
     };
   } catch (error) {

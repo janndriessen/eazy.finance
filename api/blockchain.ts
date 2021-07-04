@@ -32,7 +32,7 @@ const balance = async function(contractAdress: string) {
 const trxStatus = async function() {
   try {
     const transaction = await provider.getTransaction(
-      "0x3dd1893809922fdc4652a48495671b4567965480296343760ca1c87c408237fe"
+      "0x25950dc43e0af9ba362215807b11f4964ef4ce06d0b25c8b6de081c1503a4973"
     );
     console.log(transaction);
   } catch (error) {
@@ -40,7 +40,7 @@ const trxStatus = async function() {
   }
 };
 
-trxStatus();
+// trxStatus();
 balance(cTokenContractAddress);
 balance(usdcContractAddress);
 

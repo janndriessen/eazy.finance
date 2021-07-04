@@ -18,6 +18,38 @@ enum BorrowApiError: Error {
 }
 
 final class BorrowApi {
+    func borrow(amount: Int, completion: @escaping (Result<String, Error>) -> Void) {
+        let path = "/borrow"
+        let payload = AmountPayload(amount: amount)
+        let payloadData = try? JSONEncoder().encode(payload)
+
+        let requestBuilder = ApiRequestBuilder()
+        guard let request = requestBuilder.buildRequest(for: path, method: .post, payload: payloadData) else { return }
+
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                let error = BorrowApiError.unexpected(message: "Error with the response - unexpected status code")
+                completion(.failure(error))
+                return
+            }
+
+            if let data = data, let result = try? JSONDecoder().decode(TransactionResponse.self, from: data) {
+                print(result)
+                completion(.success(result.trx))
+                return
+            }
+
+            completion(.failure(BorrowApiError.missingResponse))
+        })
+        task.resume()
+    }
+
     func getCollateral(for amount: Int, completion: @escaping (Result<Int, Error>) -> Void) {
         let path = "/borrow/liquidity"
         let payload = AmountPayload(amount: amount)
@@ -42,6 +74,38 @@ final class BorrowApi {
             if let data = data, let result = try? JSONDecoder().decode(CollateralResponse.self, from: data) {
                 print(result)
                 completion(.success(result.collateralNeeded))
+                return
+            }
+
+            completion(.failure(BorrowApiError.missingResponse))
+        })
+        task.resume()
+    }
+
+    func supply(amount: Int, completion: @escaping (Result<String, Error>) -> Void) {
+        let path = "/supply"
+        let payload = AmountPayload(amount: amount)
+        let payloadData = try? JSONEncoder().encode(payload)
+
+        let requestBuilder = ApiRequestBuilder()
+        guard let request = requestBuilder.buildRequest(for: path, method: .post, payload: payloadData) else { return }
+
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                let error = BorrowApiError.unexpected(message: "Error with the response - unexpected status code")
+                completion(.failure(error))
+                return
+            }
+
+            if let data = data, let result = try? JSONDecoder().decode(TransactionResponse.self, from: data) {
+                print(result)
+                completion(.success(result.trx))
             }
 
             completion(.failure(BorrowApiError.missingResponse))
@@ -53,4 +117,9 @@ final class BorrowApi {
 private struct CollateralResponse: Decodable {
     let borrowAmount: Int
     let collateralNeeded: Int
+}
+
+private struct TransactionResponse: Decodable {
+    let trx: String
+    let error: String
 }

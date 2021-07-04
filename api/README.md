@@ -6,7 +6,7 @@ First get your test addresses and private keys.
 $ npx ganache-cli --account_keys_path keys.json
 ```
 
-Start a fork of mainnet locally.
+Start a fork of mainnet locally (using infura).
 
 ```
 $ npx ganache-cli \

@@ -40,6 +40,7 @@ struct DashboardView: View {
     let transactions = Transaction.transactions
 
     private let paymentsApi = PaymentsApi()
+    private let borrowApi = BorrowApi()
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -55,6 +56,22 @@ struct DashboardView: View {
 //                                CardsApi().testAuth()
 //                                PayoutsApi().payout(amount: "1000")
 //                                PaymentsApi().checkPayment(with: "fc988ed5-c129-4f70-a064-e5beb7eb8e32")
+//                                borrowApi.supply(amount: 715) { result in
+//                                    switch result {
+//                                    case .failure(let error):
+//                                        print(error)
+//                                    case .success(let trxHash):
+//                                        print(trxHash)
+//                                    }
+//                                }
+                                borrowApi.borrow(amount: 500) { result in
+                                    switch result {
+                                    case .failure(let error):
+                                        print(error)
+                                    case .success(let trxHash):
+                                        print(trxHash)
+                                    }
+                                }
                             }
                     }
                     .padding()
