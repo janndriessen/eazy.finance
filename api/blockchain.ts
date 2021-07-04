@@ -25,8 +25,8 @@ const balance = async function(contractAdress: string) {
   const symbol = await contract.symbol();
   console.log(symbol);
   console.log(balance.toNumber());
-  console.log(balance.toString());
-  console.log(balance.toHexString());
+  // console.log(balance.toString());
+  // console.log(balance.toHexString());
 };
 
 const trxStatus = async function() {
