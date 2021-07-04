@@ -10,7 +10,8 @@ import SwiftUI
 struct AddCardView: View {
     @Environment(\.presentationMode) private var presentationMode
     @State private var isLoading = false
-    @ObservedObject private var cardsApi = CardsApi()
+
+    @ObservedObject var cardsApi: CardsApi
 
     var body: some View {
         let card = cardsApi.cards.first
@@ -44,7 +45,7 @@ struct AddCardView: View {
             }
             .navigationBarHidden(true)
             .onAppear {
-                let payload = CardsApi.CreateCardPayload.sathoshisVisa
+                let payload = cardsApi.sathoshisVisa
                 cardsApi.createCard(payload: payload)
             }
         )
@@ -53,7 +54,7 @@ struct AddCardView: View {
 
 struct AddCardView_Previews: PreviewProvider {
     static var previews: some View {
-        AddCardView()
+        AddCardView(cardsApi: CardsApi())
     }
 }
 

@@ -17,6 +17,7 @@ struct OnboardingCollateralView: View {
     @State private var isPresenting = false
 
     private let paymentsApi = PaymentsApi()
+    private let cardsApi = CardsApi()
 
     var body: some View {
         ZStack(alignment: .top) {
@@ -84,7 +85,7 @@ struct OnboardingCollateralView: View {
             self.cardAdded = true
         }, content: {
             NavigationView {
-                AddCardView()
+                AddCardView(cardsApi: cardsApi)
             }
         })
     }
